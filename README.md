@@ -24,6 +24,30 @@ The project is being built as a hands-on endpoint and systems administration cas
 | Client OS | Windows 11 Pro |
 | Simulated Company Size | 200 employees |
 
+## Lab Evidence
+
+### Active Directory OU Structure
+
+The Northstar domain uses a structured OU hierarchy that separates users, workstations, servers, privileged accounts, service accounts, groups, and disabled objects.
+
+![Northstar Active Directory OU Structure](screenshots/active-directory/ou-structure.png)
+
+### RBAC / AGDLP Verification
+
+The environment uses an AGDLP-based access model rather than assigning permissions directly to individual users.
+
+**Department resource access**
+
+![RBAC Resource Membership](screenshots/powershell/rbac-resource-membership.png)
+
+**Organization-wide employee group nesting**
+
+![All Employees Membership](screenshots/powershell/rbac-all-employees-membership.png)
+
+**Endpoint administrator delegation**
+
+![Endpoint Admin Membership](screenshots/powershell/rbac-endpoint-admin-membership.png)
+
 ## Completed
 
 - Deployed Windows Server 2025 as `DC01`
@@ -93,7 +117,12 @@ Current automation includes:
 - Automated AGDLP group nesting
 - Idempotent execution to prevent duplicate objects
 
-Scripts are available in the [`powershell`](./powershell) directory.
+### Current Automation
+
+| Script | Purpose |
+|---|---|
+| [`New-NorthstarOUStructure.ps1`](powershell/New-NorthstarOUStructure.ps1) | Creates the enterprise OU hierarchy and safely detects existing objects |
+| [`New-NorthstarSecurityGroups.ps1`](powershell/New-NorthstarSecurityGroups.ps1) | Creates security groups and configures AGDLP/RBAC nesting |
 
 ## Repository Structure
 
